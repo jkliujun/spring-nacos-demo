@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: microservices-test
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/jkliujun/spring-nacos-demo.git
+    targetRevision: HEAD
+    path: helm-chart
+    helm:
+      values: |
+        global:
+          namespace: microservices-demo
+        configmap:
+          data:
+            APP_ENV: "dev"
+        orderService:
+          nodePort: 31081
+        springboot:
+          image: jkliujun/order-service:liuj-dev-20250622043346
+  destination: 
+    server: https://kubernetes.default.svc
+    namespace: microservices-demo
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
+
