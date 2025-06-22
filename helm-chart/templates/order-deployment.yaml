@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.orderService.name }}
+  namespace: {{ .Values.global.namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.orderService.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.orderService.name }}
+    spec:
+      containers:
+        - name: order
+          image: {{ .Values.orderService.image }}
+          ports:
+            - containerPort: {{ .Values.orderService.port }}
+          envFrom:
+            - configMapRef:
+                name: microservices-demo-env
+      imagePullSecrets:
+        - name: {{ .Values.orderService.imagePullSecret }}

@@ -1,0 +1,4 @@
+apiVersion: v2
+name: microservices-demo
+version: 1.0.0
+description: Spring Boot microservices on Nacos

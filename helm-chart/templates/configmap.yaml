@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: microservices-demo-env
+  namespace: {{ .Values.global.namespace }}
+data:
+  {{- toYaml .Values.configmap.data | nindent 4 }}

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <parent>
+    <groupId>com.example</groupId>
+    <artifactId>spring-nacos-demo</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <artifactId>user-service</artifactId>
+  <modelVersion>4.0.0</modelVersion>  
+
+    <properties>
+        <start-class>com.example.userservice.UserServiceApplication</start-class>
+        <docker.name>docker.io/jkliujun/${project.artifactId}:${user.name}-dev-${timestamp}</docker.name>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+       <!--todo sentinel need to support GraalVM in future-->
+       <!--<dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>${maven-deploy-plugin.version}</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>${jib.version}</version>
+                <configuration>
+                    <from>
+                        <image>${docker.base.image}</image>
+                    </from>
+                    <to>
+                        <image>${docker.name}</image>
+                    </to>
+                    <container>
+                        <mainClass>${start-class}</mainClass>
+                        <entrypoint>/main.sh</entrypoint>
+                        <environment>
+                            <MAIN_CLASS>${start-class}</MAIN_CLASS>
+                            <CHECK_ENDPOINT>/control/health</CHECK_ENDPOINT>
+                            <JAVA_MEM_LIMIT>128m</JAVA_MEM_LIMIT>
+                            <!--GOOGLE_APPLICATION_CREDENTIALS>/gcd.json</GOOGLE_APPLICATION_CREDENTIALS-->
+                            <DOCKER_NAME>${docker.name}</DOCKER_NAME>
+                            <BUILD_DATE>${timestamp}</BUILD_DATE>
+                        </environment>
+                        <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+                    </container>
+                    <extraDirectories>
+                        <paths>
+                            <path>src/main/docker</path>
+                        </paths>
+                        <permissions>
+                            <permission>
+                                <file>/main.sh</file>
+                                <mode>755</mode>
+                                <!-- Read/write/execute for owner, read/execute for group/other -->
+                            </permission>
+                        </permissions>
+                    </extraDirectories>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>docker_push</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,23 @@
+### Start user service on port 38080
+# mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=38080"
+
+GET http://localhost:38080/api/users/hello
+
+
+Hello from User Service
+
+
+###
+### Start user service on port 38081
+# mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=38081"
+
+GET http://localhost:38081/api/orders/123
+
+Order ID: 123, User Info: [User ID: 123]
+###
+
+GET http://192.168.76.111:31080/api/users/hello
+
+###
+
+GET http://192.168.76.111:31081/api/orders/123
