@@ -10,11 +10,14 @@ Hello from User Service
 ###
 ### Start user service on port 38081
 # mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=38081"
-
+# 
 GET http://localhost:38081/api/orders/123
 
 Order ID: 123, User Info: [User ID: 123]
+
 ###
+### Start user service on k8s cluster
+# $ kubectl apply -f argocd/microservices-test.yaml
 
 GET http://192.168.76.111:31080/api/users/hello
 

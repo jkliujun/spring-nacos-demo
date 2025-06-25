@@ -1,13 +1,17 @@
+grpc:
+  server:
+    port: 48000
 server:
   port: 38080  
 spring:
   application:
-    name: user-service
+    name: grpc-user-service
   cloud:
     nacos:
       discovery:
         server-addr: 192.168.76.174:8848
         enabled: true
+        port: 48000
   profiles:
     active: dev
 management:

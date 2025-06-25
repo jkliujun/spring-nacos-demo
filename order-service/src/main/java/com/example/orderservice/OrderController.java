@@ -9,15 +9,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 @RequestMapping("/api/orders")
 public class OrderController {
 
-    @Autowired
+    /*@Autowired
     private RestTemplate restTemplate;
 
     @Value("${user.service.url:http://user-service}")
-    private String userServiceUrl;
+    private String userServiceUrl;*/
 
+    @Autowired
+    private GrpcUserClient grpcUserClient;
+
+/*
     @GetMapping("/{id}")
     public String getOrderById(@PathVariable String id) {
         String userInfo = restTemplate.getForObject(userServiceUrl + "/api/users/" + id, String.class);
+        return "Order ID: " + id + ", User Info: [" + userInfo + "]";
+    }*/
+    @GetMapping("/{id}")
+    public String getOrderById(@PathVariable String id) {
+        String userInfo = grpcUserClient.getUser(id); 
         return "Order ID: " + id + ", User Info: [" + userInfo + "]";
     }
 
