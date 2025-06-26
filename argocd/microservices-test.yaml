@@ -19,7 +19,7 @@ spec:
         orderService:
           nodePort: 31081
         springboot:
-          image: jkliujun/order-service:liuj-dev-20250626011315
+          image: jkliujun/order-service:liuj-dev-20250626014427
   destination: 
     server: https://kubernetes.default.svc
     namespace: microservices-demo
