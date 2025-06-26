@@ -15,7 +15,7 @@ userService:
 
 orderService:
   name: order-service
-  image: jkliujun/order-service:liuj-dev-20250626011315
+  image: jkliujun/order-service:liuj-dev-20250626014427
   port: 38081
   nodePort: 31081
   imagePullSecret: regcred
