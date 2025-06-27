@@ -8,7 +8,7 @@ configmap:
 
 userService:
   name: user-service
-  image: jkliujun/user-service:liuj-dev-20250626011248
+  image: jkliujun/user-service:liuj-dev-20250626014405
   port: 38080
   nodePort: 31080
   imagePullSecret: regcred
