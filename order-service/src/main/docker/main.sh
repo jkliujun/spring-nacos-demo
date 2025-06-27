@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 #mkdir /home/tl/.ssh
 #exec gosu tl:tlgroup java -server ${JAVA_GC} -Xms512m -Xmx512m ${JAVA_OPTS} \
 exec java -server ${JAVA_GC} -Xms512m -Xmx512m ${JAVA_OPTS} \
