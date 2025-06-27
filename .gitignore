@@ -94,3 +94,6 @@ fabric.properties
 callback/.DS_Store
 .idea/
 .env
+
+.flattened-pom.xml
+
