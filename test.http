@@ -24,3 +24,8 @@ GET http://192.168.76.111:31080/api/users/hello
 ###
 
 GET http://192.168.76.111:31081/api/orders/123
+
+
+###
+
+curl 'http://192.168.76.111:31081/api/orders/123'
