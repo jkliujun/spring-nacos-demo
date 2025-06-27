@@ -84,8 +84,8 @@
             <version>4.11.0</version>
             <scope>test</scope>
         </dependency>
-        
-        <dependency>
+
+        <!--dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-netty-shaded</artifactId>
             <version>1.58.0</version>
@@ -100,7 +100,7 @@
             <groupId>io.grpc</groupId>
             <artifactId>grpc-stub</artifactId>
             <version>1.58.0</version>
-        </dependency>
+        </dependency-->
 
 
     </dependencies>
