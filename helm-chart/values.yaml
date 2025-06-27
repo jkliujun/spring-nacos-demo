@@ -8,14 +8,14 @@ configmap:
 
 userService:
   name: user-service
-  image: jkliujun/user-service:liuj-dev-20250627044400
+  image: jkliujun/user-service:liuj-dev-20250627060200
   port: 38080
   nodePort: 31080
   imagePullSecret: regcred
 
 orderService:
   name: order-service
-  image: jkliujun/order-service:liuj-dev-20250627044400
+  image: jkliujun/order-service:liuj-dev-20250627060200
   port: 38081
   nodePort: 31081
   imagePullSecret: regcred
