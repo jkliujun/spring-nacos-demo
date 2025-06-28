@@ -9,7 +9,7 @@ userService:
   # image: jkliujun/user-service:liuj-dev-20250628024354
   image:
     repository: jkliujun/user-service
-    tag: latest
+    tag: "20250628104716"
   port: 38080
   nodePort: 31080
   imagePullSecret: regcred
@@ -18,8 +18,7 @@ orderService:
   # image: jkliujun/order-service:liuj-dev-20250628024354
   image:
     repository: jkliujun/order-service
-    tag: latest
+    tag: "20250628104716"
   port: 38081
   nodePort: 31081
   imagePullSecret: regcred
-
