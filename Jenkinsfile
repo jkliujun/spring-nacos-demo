@@ -63,12 +63,12 @@ pipeline {
 
     stage('Commit Helm Chart Change') {
       steps {
-        sshagent([GIT_CREDENTIALS_ID]) {
+        sshagent(['cicd-jkliujun-ssh-key']) {
           sh """
-            git config user.name "jenkins"
-            git config user.email "ci@jenkins"
-            git add ${HELM_CHART_PATH}/values.yaml
-            git commit -m "Update Docker tag to ${TIMESTAMP}"
+            export GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no'
+            git remote set-url origin git@github.com:jkliujun/spring-nacos-demo.git
+            git add helm-chart/values.yaml
+            git commit -m "Update tag"
             git push origin HEAD:main
           """
         }
