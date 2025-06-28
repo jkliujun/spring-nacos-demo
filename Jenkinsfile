@@ -26,17 +26,16 @@ pipeline {
       }
     }
 
-
-
     stage('Build and Push Image via Jib - user-service') {
       steps {
         withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
           sh """
-
-            mvn clean compile jib:build \
+            cd user-service
+            mvn clean compile install \
+              -Duser.name=jenkins \
               -Djib.to.auth.username=$DOCKER_USERNAME \
               -Djib.to.auth.password=$DOCKER_PASSWORD \
-              -Djib.container.environment=BUILD_DATE=${TIMESTAMP}
+              -Dtimestamp=${TIMESTAMP}
           """
         }
       }
@@ -46,7 +45,7 @@ pipeline {
       steps {
         script {
           def valuesFile = "${HELM_CHART_PATH}/values.yaml"
-          sh "yq e '.userService.image.tag = \"${TIMESTAMP}\"' -i ${valuesFile}"
+          sh "yq e '.userService.image.tag = \"jenkins-dev-${TIMESTAMP}\"' -i ${valuesFile}"
         }
       }
     }
@@ -55,7 +54,7 @@ pipeline {
       steps {
         script {
           def valuesFile = "${HELM_CHART_PATH}/values.yaml"
-          sh "yq e '.orderService.image.tag = \"${TIMESTAMP}\"' -i ${valuesFile}"
+          sh "yq e '.orderService.image.tag = \"jenkins-dev-${TIMESTAMP}\"' -i ${valuesFile}"
         }
       }
     }
