@@ -2,9 +2,10 @@ pipeline {
   agent any
 
   environment {
-    DOCKER_IMAGE_NAME = "jkliujun/user-service"
+    USER_DOCKER_IMAGE_NAME="jkliujun/user-service"
+    ORDER_DOCKER_IMAGE_NAME="jkliujun/order-service"
     DOCKER_CREDENTIALS_ID = "dockerhub-creds"
-    GIT_CREDENTIALS_ID = "cicd-jkliujun-jenkins-github-token"
+    GIT_CREDENTIALS_ID = "cicd-jkliujun-ssh-key"
     HELM_CHART_PATH = "helm-chart"
     TIMESTAMP = ""  // set dynamically
   }
@@ -33,20 +34,18 @@ pipeline {
             mvn compile install -DskipTests
             cd ..
             cd user-service
-            export DOCKER_IMAGE_NAME="jkliujun/user-service"
             mvn compile jib:build \
-              -Djib.to.image=${DOCKER_IMAGE_NAME}:${TIMESTAMP} \
+              -Djib.to.image=${USER_DOCKER_IMAGE_NAME}:${TIMESTAMP} \
               -Djib.to.auth.username=$DOCKER_USERNAME \
               -Djib.to.auth.password=$DOCKER_PASSWORD \
-              -Djib.container.environment=BUILD_DATE=${TIMESTAMP},DOCKER_NAME=${DOCKER_IMAGE_NAME}:${TIMESTAMP}
+              -Djib.container.environment=BUILD_DATE=${TIMESTAMP},DOCKER_NAME=${USER_DOCKER_IMAGE_NAME}:${TIMESTAMP}
             cd ..
             cd order-service
-            export DOCKER_IMAGE_NAME="jkliujun/order-service"
             mvn compile jib:build \
-              -Djib.to.image=${DOCKER_IMAGE_NAME}:${TIMESTAMP} \
+              -Djib.to.image=${ORDER_DOCKER_IMAGE_NAME}:${TIMESTAMP} \
               -Djib.to.auth.username=$DOCKER_USERNAME \
               -Djib.to.auth.password=$DOCKER_PASSWORD \
-              -Djib.container.environment=BUILD_DATE=${TIMESTAMP},DOCKER_NAME=${DOCKER_IMAGE_NAME}:${TIMESTAMP}
+              -Djib.container.environment=BUILD_DATE=${TIMESTAMP},DOCKER_NAME=${ORDER_DOCKER_IMAGE_NAME}:${TIMESTAMP}
             cd ..
           """
         }
