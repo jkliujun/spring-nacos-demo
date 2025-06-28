@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: order
-          image: {{ .Values.orderService.image }}
+          image: {{ .Values.orderService.image.repository }}:{{ .Values.orderService.image.tag }}
           ports:
             - containerPort: {{ .Values.orderService.port }}
           envFrom:
