@@ -26,7 +26,7 @@ pipeline {
       }
     }
 
-    stage('Build and Push Image via Jib - user-service') {
+    stage('Build and Push Image via Jib') {
       steps {
         withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
           sh """
@@ -40,19 +40,11 @@ pipeline {
       }
     }
 
-    stage('Update Helm Chart Image Tag - user-service') {
+    stage('Update Helm Chart Image Tag') {
       steps {
         script {
           def valuesFile = "${HELM_CHART_PATH}/values.yaml"
           sh "yq e '.userService.image.tag = \"jenkins-dev-${TIMESTAMP}\"' -i ${valuesFile}"
-        }
-      }
-    }
-
-    stage('Update Helm Chart Image Tag - order-service') {
-      steps {
-        script {
-          def valuesFile = "${HELM_CHART_PATH}/values.yaml"
           sh "yq e '.orderService.image.tag = \"jenkins-dev-${TIMESTAMP}\"' -i ${valuesFile}"
         }
       }
