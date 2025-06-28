@@ -8,14 +8,20 @@ configmap:
 
 userService:
   name: user-service
-  image: jkliujun/user-service:liuj-dev-20250628024354
+  # image: jkliujun/user-service:liuj-dev-20250628024354
+  image:
+    repository: jkliujun/user-service
+    tag: latest
   port: 38080
   nodePort: 31080
   imagePullSecret: regcred
 
 orderService:
   name: order-service
-  image: jkliujun/order-service:liuj-dev-20250628024354
+  # image: jkliujun/order-service:liuj-dev-20250628024354
+  image:
+    repository: jkliujun/order-service
+    tag: latest
   port: 38081
   nodePort: 31081
   imagePullSecret: regcred
