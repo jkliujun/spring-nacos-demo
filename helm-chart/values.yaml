@@ -22,5 +22,4 @@ orderService:
   port: 38081
   nodePort: 31081
   imagePullSecret: regcred
-image:
-  tag: "20250628103201"
+
