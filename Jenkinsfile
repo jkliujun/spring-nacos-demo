@@ -56,8 +56,8 @@ pipeline {
       steps {
         script {
           def valuesFile = "${HELM_CHART_PATH}/values.yaml"
-          sh "yq e 'userService.image.tag = \"${TIMESTAMP}\"' -i ${valuesFile}"
-          sh "yq e 'orderService.image.tag = \"${TIMESTAMP}\"' -i ${valuesFile}"
+          sh "yq e '.userService.image.tag = \"${TIMESTAMP}\"' -i ${valuesFile}"
+          sh "yq e '.orderService.image.tag = \"${TIMESTAMP}\"' -i ${valuesFile}"
         }
       }
     }
