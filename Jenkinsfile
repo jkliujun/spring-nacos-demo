@@ -26,37 +26,60 @@ pipeline {
       }
     }
 
-    stage('Build and Push Image via Jib') {
+    stage('Build and Push Image via Jib - grpc-proto') {
       steps {
         withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
           sh """
             cd grpc-proto
             mvn compile install -DskipTests
-            cd ..
+          """
+        }
+      }
+    }
+
+    stage('Build and Push Image via Jib - user-service') {
+      steps {
+        withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+          sh """
             cd user-service
             mvn compile jib:build \
               -Djib.to.image=${USER_DOCKER_IMAGE_NAME}:${TIMESTAMP} \
               -Djib.to.auth.username=$DOCKER_USERNAME \
               -Djib.to.auth.password=$DOCKER_PASSWORD \
               -Djib.container.environment=BUILD_DATE=${TIMESTAMP},DOCKER_NAME=${USER_DOCKER_IMAGE_NAME}:${TIMESTAMP}
-            cd ..
+          """
+        }
+      }
+    }
+
+    stage('Build and Push Image via Jib - order-service') {
+      steps {
+        withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+          sh """
             cd order-service
             mvn compile jib:build \
               -Djib.to.image=${ORDER_DOCKER_IMAGE_NAME}:${TIMESTAMP} \
               -Djib.to.auth.username=$DOCKER_USERNAME \
               -Djib.to.auth.password=$DOCKER_PASSWORD \
               -Djib.container.environment=BUILD_DATE=${TIMESTAMP},DOCKER_NAME=${ORDER_DOCKER_IMAGE_NAME}:${TIMESTAMP}
-            cd ..
           """
         }
       }
     }
 
-    stage('Update Helm Chart Image Tag') {
+    stage('Update Helm Chart Image Tag - user-service') {
       steps {
         script {
           def valuesFile = "${HELM_CHART_PATH}/values.yaml"
           sh "yq e '.userService.image.tag = \"${TIMESTAMP}\"' -i ${valuesFile}"
+        }
+      }
+    }
+
+    stage('Update Helm Chart Image Tag - order-service') {
+      steps {
+        script {
+          def valuesFile = "${HELM_CHART_PATH}/values.yaml"
           sh "yq e '.orderService.image.tag = \"${TIMESTAMP}\"' -i ${valuesFile}"
         }
       }
