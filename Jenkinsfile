@@ -30,7 +30,6 @@ pipeline {
       steps {
         withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
           sh """
-            cd user-service
             mvn clean compile install \
               -Duser.name=jenkins \
               -Djib.to.auth.username=$DOCKER_USERNAME \
