@@ -54,6 +54,7 @@
 
     <modules>
       <module>spring-cloud-alibaba-dependencies</module>
+      <module>grpc-proto</module>
       <module>user-service</module>
       <module>order-service</module>
     </modules>
@@ -98,7 +99,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>2.7.18</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
