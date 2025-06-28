@@ -89,7 +89,7 @@
             <artifactId>grpc-netty-shaded</artifactId>
             <version>1.58.0</version>
             <scope>test</scope>
-        </dependency>
+        </dependency-->
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-protobuf</artifactId>
@@ -99,8 +99,12 @@
             <groupId>io.grpc</groupId>
             <artifactId>grpc-stub</artifactId>
             <version>1.58.0</version>
-        </dependency-->
-
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-core</artifactId>
+            <version>1.58.0</version>
+        </dependency>
     </dependencies>
 
     <build>
