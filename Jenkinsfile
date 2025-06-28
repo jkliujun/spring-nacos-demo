@@ -67,6 +67,8 @@ pipeline {
         sshagent(['cicd-jkliujun-ssh-key']) {
           sh """
             export GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no'
+            git config user.name "jenkins"
+            git config user.email "ci@jenkins"
             git remote set-url origin git@github.com:jkliujun/spring-nacos-demo.git
             git add helm-chart/values.yaml
             git commit -m "Update tag"
