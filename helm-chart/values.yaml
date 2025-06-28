@@ -1,11 +1,9 @@
 global:
   namespace: microservices-demo
   environment: dev
-
 configmap:
   data:
     APP_ENV: "dev"
-
 userService:
   name: user-service
   # image: jkliujun/user-service:liuj-dev-20250628024354
@@ -15,7 +13,6 @@ userService:
   port: 38080
   nodePort: 31080
   imagePullSecret: regcred
-
 orderService:
   name: order-service
   # image: jkliujun/order-service:liuj-dev-20250628024354
@@ -25,3 +22,5 @@ orderService:
   port: 38081
   nodePort: 31081
   imagePullSecret: regcred
+image:
+  tag: "20250628103201"
