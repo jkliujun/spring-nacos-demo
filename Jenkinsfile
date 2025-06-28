@@ -56,8 +56,8 @@ pipeline {
       steps {
         withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
           sh """
-            cd clean order-service
-            mvn compile jib:build \
+            cd order-service
+            mvn clean compile jib:build \
               -Djib.to.image=${ORDER_DOCKER_IMAGE_NAME}:${TIMESTAMP} \
               -Djib.to.auth.username=$DOCKER_USERNAME \
               -Djib.to.auth.password=$DOCKER_PASSWORD \
