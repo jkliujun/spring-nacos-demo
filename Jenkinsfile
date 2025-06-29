@@ -59,7 +59,7 @@ pipeline {
             git config user.email "ci@jenkins"
             git remote set-url origin git@github.com:jkliujun/spring-nacos-demo.git
             git add helm-chart/values.yaml
-            git commit -m "Update tag"
+            git commit -m "Update tag : jenkins-dev-${TIMESTAMP}" 
             git push origin HEAD:main
           """
         }
