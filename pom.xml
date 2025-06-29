@@ -326,6 +326,10 @@
                                 </goals>
                             </execution>
                         </executions>
+                        <configuration>
+                            <gpg.executable>gpg</gpg.executable>
+                            <gpg.passphraseServerId>gpg.passphrase</gpg.passphraseServerId>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
