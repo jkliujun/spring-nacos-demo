@@ -6,7 +6,6 @@ configmap:
     APP_ENV: "dev"
 userService:
   name: user-service
-  # image: jkliujun/user-service:liuj-dev-20250628024354
   image:
     repository: jkliujun/user-service
     tag: "jenkins-dev-20250629033509"
@@ -15,7 +14,6 @@ userService:
   imagePullSecret: regcred
 orderService:
   name: order-service
-  # image: jkliujun/order-service:liuj-dev-20250628024354
   image:
     repository: jkliujun/order-service
     tag: "jenkins-dev-20250629033509"
