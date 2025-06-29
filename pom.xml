@@ -296,6 +296,10 @@
                         <configuration>
                             <doclint>none</doclint>
                             <source>17</source>
+                            <failOnError>false</failOnError>
+                            <additionalJOptions>
+                            <additionalJOption>-Xdoclint:none</additionalJOption>
+                            </additionalJOptions>
                         </configuration>
                         <executions>
                             <execution>
