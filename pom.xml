@@ -327,8 +327,10 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <gpg.executable>gpg</gpg.executable>
-                            <gpg.passphraseServerId>gpg.passphrase</gpg.passphraseServerId>
+                            <gpgKeyname>E4A59D7DCB19FAB7</gpgKeyname> <!-- Your long GPG key ID -->
+                            <useAgent>false</useAgent> <!-- For passphrase-less keys -->
+                            <defaultKeyring>false</defaultKeyring>
+                            <homedir>${user.home}/.gnupg</homedir>
                         </configuration>
                     </plugin>
                 </plugins>
