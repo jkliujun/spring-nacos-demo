@@ -8,7 +8,7 @@ userService:
   name: user-service
   image:
     repository: jkliujun/user-service
-    tag: "jenkins-dev-20250629100730"
+    tag: "jenkins-dev-20250630013756"
   port: 38080
   nodePort: 31080
   imagePullSecret: regcred
@@ -16,7 +16,7 @@ orderService:
   name: order-service
   image:
     repository: jkliujun/order-service
-    tag: "jenkins-dev-20250629100730"
+    tag: "jenkins-dev-20250630013756"
   port: 38081
   nodePort: 31081
   imagePullSecret: regcred
